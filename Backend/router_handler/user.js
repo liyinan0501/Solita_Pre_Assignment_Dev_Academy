@@ -17,8 +17,7 @@ exports.login = (req, res) => {
     const token = jwt.sign(user, config.jwtSecretKey, {
       expiresIn: config.expiresIn,
     })
-    res.send({
-      status: 200,
+    res.status(200).send({
       message: 'Login Succeeds!',
       token: 'Bearer ' + token,
     })
