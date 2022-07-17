@@ -1,12 +1,5 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-<<<<<<< HEAD
-import App from './App'
-import 'antd/dist/antd.min.css'
-
-const root = ReactDOM.createRoot(document.getElementById('root'))
-root.render(<App />)
-=======
 import 'antd/dist/antd.min.css'
 import './index.scss'
 import App from './App'
@@ -19,4 +12,3 @@ root.render(
     <App />
   </Provider>
 )
->>>>>>> frontend

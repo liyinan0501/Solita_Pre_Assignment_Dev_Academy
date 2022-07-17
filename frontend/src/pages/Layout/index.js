@@ -1,10 +1,3 @@
-<<<<<<< HEAD
-const Layout = () => {
-  return <div>Layout Page</div>
-}
-
-export default Layout
-=======
 import styles from './index.module.scss'
 import { Layout, Menu, Popconfirm } from 'antd'
 
@@ -98,4 +91,3 @@ const LayoutComponent = () => {
 }
 
 export default LayoutComponent
->>>>>>> frontend

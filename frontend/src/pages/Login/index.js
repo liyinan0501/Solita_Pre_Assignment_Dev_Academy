@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-const Login = () => {
-  return <div>Login Page</div>
-=======
 import styles from './index.module.scss'
 import logo from 'assets/Solita-logo.png'
 import { Card, Form, Input, Checkbox, Button, message } from 'antd'
@@ -107,7 +103,6 @@ const Login = () => {
       </Card>
     </div>
   )
->>>>>>> frontend
 }
 
 export default Login

@@ -1,18 +1,5 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 
-<<<<<<< HEAD
-import Login from 'pages/Login'
-import Layout from 'pages/Layout'
-
-function App() {
-  return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/home" element={<Layout />}></Route>
-        <Route path="/login" element={<Login />}></Route>
-      </Routes>
-    </BrowserRouter>
-=======
 import AuthRoute from 'components/AuthRoute'
 
 import Login from 'pages/Login'
@@ -51,7 +38,6 @@ function App() {
         </Routes>
       </BrowserRouter>
     </div>
->>>>>>> frontend
   )
 }
 
