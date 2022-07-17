@@ -20,6 +20,14 @@ exports.getStations = (req, res) => {
   })
 }
 
+exports.getStationList = (req, res) => {
+  const sqlStr = 'select id, nimi from solita_db.stations order by nimi asc'
+  db.query(sqlStr, (err, results) => {
+    if (err) return res.cc(err, 507)
+    res.status(200).send(results)
+  })
+}
+
 exports.getSingleStation = (req, res) => {
   const { id } = req.params
   const sqlStr = 'select * from stations where id = ?'

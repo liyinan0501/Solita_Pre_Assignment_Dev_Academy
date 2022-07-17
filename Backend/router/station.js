@@ -13,6 +13,8 @@ router.get(
   station_handler.getStations
 )
 
+router.get('/stationlist', station_handler.getStationList)
+
 router.get(
   '/singlestation/:id',
   expressJoi(get_singleStation_schema),
