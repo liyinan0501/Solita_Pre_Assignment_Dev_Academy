@@ -66,7 +66,7 @@ const LayoutComponent = () => {
           <Sider width={200}>
             <Menu
               mode="inline"
-              defaultSelectedKeys={[location.pathname]}
+              selectedKeys={[location.pathname]}
               style={{
                 height: '100%',
                 borderRight: 0,
