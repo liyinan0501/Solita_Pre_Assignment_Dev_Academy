@@ -17,10 +17,11 @@
 
 ### <u>Response</u>
 
-| Status | Description              |
-| ------ | ------------------------ |
-| 200    | ok                       |
-| 507    | server or database error |
+| Status | Description                    |
+| ------ | ------------------------------ |
+| 200    | ok                             |
+| 400    | username or password incorrect |
+| 507    | server or database error       |
 
 ### <u>Response Schema:</u>
 
