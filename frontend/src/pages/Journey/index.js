@@ -1,12 +1,12 @@
 import { Link } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import { useEffect, useRef } from 'react'
+import { journeysAction } from 'store/actions'
 import StationList from 'components/Station'
 
 import styles from './index.module.scss'
 import { Card, Breadcrumb, Form, Button, DatePicker, Table } from 'antd'
 import { HomeOutlined, BranchesOutlined } from '@ant-design/icons'
-import { useDispatch, useSelector } from 'react-redux'
-import { useEffect } from 'react'
-import { journeysAction } from 'store/actions'
 const { RangePicker } = DatePicker
 
 const Journey = () => {
@@ -20,6 +20,34 @@ const Journey = () => {
     (state) => state.journey
   )
 
+  // default pagination of request params
+  let params = {
+    pageNumber: 1,
+    pageSize: 100,
+  }
+
+  // for saving the filtered information
+  let filters = useRef({})
+
+  const onFinish = ({ departureStationId, date }) => {
+    const paramsFilter = { departureStationId }
+    if (date) {
+      paramsFilter.departureDate = date[0]
+        .startOf('day')
+        .format('YYYY-MM-DD HH:mm:ss')
+      paramsFilter.returnDate = date[1]
+        .endOf('day')
+        .format('YYYY-MM-DD HH:mm:ss')
+    }
+    filters.current = paramsFilter
+    dispatch(journeysAction(paramsFilter))
+  }
+
+  const changePage = (pageNumber, pageSize) => {
+    params = { ...filters.current, pageNumber, pageSize }
+    dispatch(journeysAction(params))
+  }
+
   const columns = [
     {
       title: 'Departure Station',
@@ -30,18 +58,16 @@ const Journey = () => {
       dataIndex: 'return_station_name',
     },
     {
-      title: 'Cover Distance',
+      title: 'Cover Distance (km)',
       dataIndex: 'covered_distance',
+      render: (meters) => (meters / 1000).toFixed(2),
     },
     {
-      title: 'Duration',
+      title: 'Duration (min)',
       dataIndex: 'duration',
+      render: (seconds) => (seconds / 60).toFixed(2),
     },
   ]
-
-  const onFinish = (values) => {
-    console.log(values)
-  }
 
   return (
     <div className={styles.root}>
@@ -64,13 +90,29 @@ const Journey = () => {
         <Form onFinish={onFinish}>
           <Form.Item
             label="Departure Station"
-            name="nimi"
+            name="departureStationId"
             labelCol={{ span: 3 }}
+            rules={[
+              {
+                required: true,
+                message: 'Please input a departure station',
+              },
+            ]}
           >
             <StationList />
           </Form.Item>
 
-          <Form.Item label="Date" name="date" labelCol={{ span: 3 }}>
+          <Form.Item
+            label="Date"
+            name="date"
+            labelCol={{ span: 3 }}
+            rules={[
+              {
+                required: true,
+                message: 'Please input a date',
+              },
+            ]}
+          >
             <RangePicker style={{ width: 266 }} />
           </Form.Item>
 
@@ -83,7 +125,18 @@ const Journey = () => {
       </Card>
 
       <Card title={`Total ${totalCount} records:`}>
-        <Table columns={columns} dataSource={list} />
+        <Table
+          columns={columns}
+          dataSource={list}
+          rowKey="id"
+          pagination={{
+            position: ['bottomCenter'],
+            total: totalCount,
+            pageSize,
+            current: pageNumber,
+            onChange: changePage,
+          }}
+        />
       </Card>
     </div>
   )
