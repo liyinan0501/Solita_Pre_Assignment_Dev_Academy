@@ -10,3 +10,18 @@ export function getStationList() {
     url: '/solita/stationlist',
   })
 }
+
+/**
+ * all stations request
+ * {@param}:
+ * @param {number} pageNumber
+ * @param {number} pageSize
+ * @param {number} stationId
+ */
+export function getStations(params) {
+  return request({
+    method: 'GET',
+    url: 'solita/stations',
+    params,
+  })
+}
