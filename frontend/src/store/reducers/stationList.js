@@ -1,8 +1,8 @@
 const initialState = []
 
-const stations = (state = initialState, action) => {
+const stationList = (state = initialState, action) => {
   switch (action.type) {
-    case 'getStations':
+    case 'getStationList':
       return action.payload
 
     default:
@@ -10,4 +10,4 @@ const stations = (state = initialState, action) => {
   }
 }
 
-export default stations
+export default stationList
