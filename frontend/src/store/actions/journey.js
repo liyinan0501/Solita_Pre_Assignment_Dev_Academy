@@ -1,8 +1,8 @@
-import request from 'utils/request'
+import { getJourneyList } from 'api/journey'
 
 export const journeysAction = (params) => {
   return async (dispatch) => {
-    const res = await request.get('/solita/trips', { params })
+    const res = await getJourneyList(params)
 
     dispatch({
       type: 'getJourneys',
