@@ -7,7 +7,7 @@ const { Option } = Select
 
 function StationList({ value, onChange }) {
   const dispatch = useDispatch()
-  const stationList = useSelector((state) => state.station)
+  const stationList = useSelector((state) => state.stationList)
 
   useEffect(() => {
     dispatch(stationListAction())
