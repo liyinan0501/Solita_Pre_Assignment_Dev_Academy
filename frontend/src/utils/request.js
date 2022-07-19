@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { removeToken, hasToken, getToken } from './token'
+import { hasToken, getToken } from './token'
 
 export const baseURL = 'http://127.0.0.1:3007/'
 
