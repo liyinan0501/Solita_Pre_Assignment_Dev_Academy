@@ -1,12 +1,12 @@
 import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect, useRef } from 'react'
-import { stationsAction } from 'store/actions'
+import { stationsAction, showDetailAction } from 'store/actions'
 import StationList from 'components/Station'
 import SingleStation from 'pages/SingleStation'
 
 import { Card, Breadcrumb, Form, Button, Table } from 'antd'
-import { HomeOutlined, FlagOutlined } from '@ant-design/icons'
+import { HomeOutlined, FlagOutlined, SearchOutlined } from '@ant-design/icons'
 
 const Station = () => {
   const dispatch = useDispatch()
@@ -39,6 +39,11 @@ const Station = () => {
     dispatch(stationsAction(params))
   }
 
+  const { showDetail, showDetailId } = useSelector((item) => item.showDetail)
+  const goSingleStation = (id) => {
+    dispatch(showDetailAction(true, id))
+  }
+
   const columns = [
     {
       title: 'Number',
@@ -60,12 +65,21 @@ const Station = () => {
       title: 'Action',
       dataIndex: 'id',
       render: (id) => {
-        return <SingleStation id={id}></SingleStation>
+        return (
+          <div>
+            <Button
+              shape="circle"
+              icon={<SearchOutlined />}
+              onClick={() => goSingleStation(id)}
+            />
+          </div>
+        )
       },
     },
   ]
   return (
     <div>
+      {showDetail ? <SingleStation id={showDetailId}></SingleStation> : null}
       <Card
         title={
           <Breadcrumb>
@@ -104,7 +118,6 @@ const Station = () => {
           </Form.Item>
         </Form>
       </Card>
-
       <Card title={`Total ${totalCount} records:`}>
         <Table
           columns={columns}
