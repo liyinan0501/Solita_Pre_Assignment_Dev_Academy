@@ -15,10 +15,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           {/* Public Routes: */}
-          <Route
-            path="/"
-            element={<Navigate to="/home/dashboard" replace />}
-          ></Route>
+          <Route path="/" element={<Navigate to="/login" replace />}></Route>
           <Route path="/login" element={<Login />}></Route>
           <Route path="*" element={<NotFound />}></Route>
 
