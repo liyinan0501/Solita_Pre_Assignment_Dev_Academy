@@ -1,4 +1,4 @@
-// validating station module
+// validating station related module
 const Joi = require('joi')
 
 const pageNumber = Joi.number().min(1)

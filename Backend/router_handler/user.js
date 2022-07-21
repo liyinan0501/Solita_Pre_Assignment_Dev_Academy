@@ -12,7 +12,7 @@ exports.login = (req, res) => {
     if (userInfo.password !== results[0].password) {
       return res.cc('Password is not correct', 401)
     }
-    // For security, taking out password from token.
+    // for security, taking out password from token.
     const user = { ...results[0], password: '' }
     const token = jwt.sign(user, config.jwtSecretKey, {
       expiresIn: config.expiresIn,

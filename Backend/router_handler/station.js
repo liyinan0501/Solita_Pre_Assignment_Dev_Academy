@@ -1,5 +1,6 @@
 const db = require('../db/index')
 
+// get station related router handlers
 exports.getStations = (req, res) => {
   let { pageNumber, pageSize, stationId } = req.query
 

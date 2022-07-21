@@ -1,5 +1,6 @@
 const db = require('../db/index')
 
+// get journey related router handlers
 exports.getTrips = (req, res) => {
   let { pageNumber, pageSize, departureStationId, departureDate, returnDate } =
     req.query

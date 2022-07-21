@@ -6,9 +6,9 @@ app.use(cors())
 
 app.use(express.urlencoded({ extended: false }))
 
-// registers a middleware for handling the errors
+// a middleware for handling the errors
 app.use((req, res, next) => {
-  // the default value of status = 400
+  // default value of status = 400
   res.cc = function (err, status = 400) {
     res.status(status).send({
       status,
@@ -18,7 +18,7 @@ app.use((req, res, next) => {
   next()
 })
 
-// parser token
+// parser the token
 const { expressjwt } = require('express-jwt')
 const config = require('./config')
 app.use(
@@ -35,7 +35,7 @@ const stationRouter = require('./router/station')
 app.use('/solita', stationRouter)
 
 const Joi = require('joi')
-// registers a middleware for handling Joi and Token errors.
+// a middleware for handling Joi validation and Token errors.
 app.use((err, req, res, next) => {
   // handling error from Joi
   if (err instanceof Joi.ValidationError) return res.cc(err, 400)
