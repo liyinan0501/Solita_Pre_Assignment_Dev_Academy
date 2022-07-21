@@ -8,7 +8,7 @@ app.use(express.urlencoded({ extended: false }))
 
 // registers a middleware for handling the errors
 app.use((req, res, next) => {
-  // the default value of status = 400 means failure
+  // the default value of status = 400
   res.cc = function (err, status = 400) {
     res.status(status).send({
       status,

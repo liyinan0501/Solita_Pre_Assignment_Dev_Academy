@@ -7,10 +7,10 @@ exports.login = (req, res) => {
   const userInfo = req.body
   const sqlStr = 'select * from users where username = ?'
   db.query(sqlStr, [userInfo.username], (err, results) => {
-    if (err) return res.cc(err)
-    if (results.length !== 1) return res.cc('Username does not exist')
+    if (err) return res.cc(err, 500)
+    if (results.length !== 1) return res.cc('Username does not exist', 401)
     if (userInfo.password !== results[0].password) {
-      return res.cc('Password is not correct')
+      return res.cc('Password is not correct', 401)
     }
     // For security, taking out password from token.
     const user = { ...results[0], password: '' }
