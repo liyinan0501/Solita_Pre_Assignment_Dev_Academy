@@ -2,8 +2,8 @@
 const Joi = require('joi')
 
 const pageNumber = Joi.number().min(1)
-const pageSize = Joi.number()
-const stationId = Joi.number().min(1).max(902)
+const pageSize = Joi.number().min(0)
+const stationId = Joi.number().min(1)
 
 exports.get_stations_schema = {
   query: {
