@@ -25,3 +25,15 @@ export function getStations(params) {
     params,
   })
 }
+
+/**
+ * single station request
+ * {@param}:
+ * @param {number} stationId
+ */
+export function getSingleStation(params) {
+  return request({
+    method: 'GET',
+    url: `solita/singlestation/${params}`,
+  })
+}
