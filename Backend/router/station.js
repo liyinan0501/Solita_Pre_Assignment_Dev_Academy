@@ -16,7 +16,7 @@ router.get(
 router.get('/stationlist', station_handler.getStationList)
 
 router.get(
-  '/singlestation/:id',
+  '/singlestation/:stationId',
   expressJoi(get_singleStation_schema),
   station_handler.getSingleStation
 )
