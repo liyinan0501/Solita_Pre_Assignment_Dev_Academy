@@ -15,10 +15,10 @@ function StationList({ value, onChange }) {
 
   return (
     <Select
-      placeholder="Select a departure station name or number"
+      placeholder="Select a station name"
       value={value}
       onChange={onChange}
-      style={{ width: 330 }}
+      style={{ width: 266 }}
     >
       {stationList.map((item) => (
         <Option key={item.id} value={item.id}>
