@@ -2,15 +2,17 @@ import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { SingleStationAction, showDetailAction } from 'store/actions'
 
-import { Button, Modal } from 'antd'
+import { Button, Modal, Table, Divider } from 'antd'
+
+import styles from './index.module.scss'
 
 const SingleStation = ({ id }) => {
   const [isModalVisible, setIsModalVisible] = useState(false)
 
   const dispatch = useDispatch()
   useEffect(() => {
-    dispatch(SingleStationAction(id))
     setIsModalVisible(true)
+    dispatch(SingleStationAction(id))
   }, [dispatch, id])
 
   const stationDetail = useSelector((item) => item.singleStation)
@@ -18,6 +20,28 @@ const SingleStation = ({ id }) => {
     dispatch(showDetailAction(false, 0))
     setIsModalVisible(false)
   }
+
+  const columns = [
+    {
+      title: 'Return Station',
+      dataIndex: 'return_station_name',
+    },
+    {
+      title: 'Amount',
+      dataIndex: 'times',
+    },
+  ]
+
+  const columns1 = [
+    {
+      title: 'Departure Station',
+      dataIndex: 'departure_station_name',
+    },
+    {
+      title: 'Amount',
+      dataIndex: 'times',
+    },
+  ]
 
   return (
     <div>
@@ -30,29 +54,64 @@ const SingleStation = ({ id }) => {
             Ok
           </Button>,
         ]}
-        width={620}
+        width={750}
         destroyOnClose={true}
+        wrapClassName={styles.root}
       >
-        <h3>Station Name</h3>
-        <p>{stationDetail.nimi}</p>
-        <h3>Station Address</h3>
-        <p>{stationDetail.osoite}</p>
-        <h3>Total number of journeys starting from the station</h3>
-        <p>{stationDetail.startCount}</p>
-        <h3>Total number of journeys ending at the station</h3>
-        <p>{stationDetail.endCount}</p>
-        <h3>The average distance of a journey starting from the station</h3>
-        <p>{stationDetail.startAvg}(m)</p>
-        <h3>The average distance of a journey ending at the station</h3>
-        <p>{stationDetail.endAvg}(m)</p>
+        <h1>
+          <span className="underline--magical">{stationDetail.nimi}</span>
+        </h1>
+
+        <h2>{stationDetail.osoite}</h2>
+        <Divider />
+
         <h3>
-          Top 5 most popular return stations for journeys starting from the
-          station
+          Total number of journeys starting from the station:{' '}
+          <span>{stationDetail.startCount}</span>
         </h3>
+
         <h3>
-          Top 5 most popular departure stations for journeys ending at the
-          station
+          Total number of journeys ending at the station:
+          <span>{stationDetail.endCount}</span>
         </h3>
+
+        <h3>
+          The average distance of a journey starting from the station:{' '}
+          <span>≈ {(stationDetail.startAvg / 1000).toFixed(2)} km</span>
+        </h3>
+
+        <h3>
+          The average distance of a journey ending at the station:{' '}
+          <span>≈ {(stationDetail.endAvg / 1000).toFixed(2)} km</span>
+        </h3>
+        <Divider />
+
+        <Divider>
+          <h3>
+            Top 5 most popular return stations for journeys starting from the
+            station
+          </h3>
+        </Divider>
+
+        <Table
+          columns={columns}
+          dataSource={stationDetail.topReturn}
+          rowKey="return_station_name"
+          pagination={false}
+        />
+
+        <Divider>
+          <h3>
+            Top 5 most popular departure stations for journeys ending at the
+            station
+          </h3>
+        </Divider>
+        <Table
+          columns={columns1}
+          dataSource={stationDetail.topDeparture}
+          rowKey="departure_station_name"
+          pagination={false}
+        />
       </Modal>
     </div>
   )
