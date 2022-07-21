@@ -1,10 +1,9 @@
-import styles from './index.module.scss'
-import { Layout, Menu, Popconfirm } from 'antd'
-
 import { Outlet, Link, useNavigate, useLocation } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { logout } from 'store/actions'
 
+import styles from './index.module.scss'
+import { Layout, Menu, Popconfirm } from 'antd'
 import {
   HomeOutlined,
   BranchesOutlined,

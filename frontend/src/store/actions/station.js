@@ -22,7 +22,7 @@ export const stationsAction = (params) => {
   }
 }
 
-export const SingleStationAction = (params) => {
+export const singleStationAction = (params) => {
   return async (dispatch) => {
     const res = await getSingleStation(params)
     console.log(res)

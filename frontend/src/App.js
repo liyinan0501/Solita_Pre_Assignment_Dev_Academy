@@ -1,5 +1,4 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
-
 import AuthRoute from 'components/AuthRoute'
 
 import Login from 'pages/Login'

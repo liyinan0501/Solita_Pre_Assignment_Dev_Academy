@@ -1,18 +1,18 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { SingleStationAction, showDetailAction } from 'store/actions'
+import { singleStationAction, showDetailAction } from 'store/actions'
 
 import { Button, Modal, Table, Divider } from 'antd'
-
 import styles from './index.module.scss'
 
 const SingleStation = ({ id }) => {
+  const dispatch = useDispatch()
+
   const [isModalVisible, setIsModalVisible] = useState(false)
 
-  const dispatch = useDispatch()
   useEffect(() => {
     setIsModalVisible(true)
-    dispatch(SingleStationAction(id))
+    dispatch(singleStationAction(id))
   }, [dispatch, id])
 
   const stationDetail = useSelector((item) => item.singleStation)

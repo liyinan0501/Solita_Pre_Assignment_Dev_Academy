@@ -1,6 +1,6 @@
+import { useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { useEffect, useRef } from 'react'
 import { journeysAction } from 'store/actions'
 import StationList from 'components/Station'
 

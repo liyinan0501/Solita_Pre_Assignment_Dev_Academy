@@ -1,15 +1,17 @@
-import styles from './index.module.scss'
-import logo from 'assets/Solita-logo.png'
-import { Card, Form, Input, Checkbox, Button, message } from 'antd'
+import React, { useState } from 'react'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { loginAction } from 'store/actions/index'
-import { useLocation, useNavigate } from 'react-router-dom'
-import React, { useState } from 'react'
+
+import { Card, Form, Input, Checkbox, Button, message } from 'antd'
+import styles from './index.module.scss'
+import logo from 'assets/Solita-logo.png'
 
 const Login = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const location = useLocation()
+
   const [loadings, setLoadings] = useState(false)
 
   const onFinish = async (values) => {
