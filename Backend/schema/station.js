@@ -1,18 +1,20 @@
 // validating station module
 const Joi = require('joi')
 
-const page = Joi.number().min(1)
-
-const id = Joi.number().min(1).max(902).required()
+const pageNumber = Joi.number().min(1)
+const pageSize = Joi.number()
+const stationId = Joi.number().min(1).max(902)
 
 exports.get_stations_schema = {
   query: {
-    page,
+    pageNumber,
+    pageSize,
+    stationId,
   },
 }
 
 exports.get_singleStation_schema = {
   params: {
-    id,
+    stationId,
   },
 }
