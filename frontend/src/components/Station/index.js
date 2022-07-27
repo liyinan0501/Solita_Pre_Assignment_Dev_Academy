@@ -11,7 +11,7 @@ function StationList({ value, onChange }) {
 
   useEffect(() => {
     dispatch(stationListAction())
-  })
+  }, [dispatch])
 
   return (
     <Select

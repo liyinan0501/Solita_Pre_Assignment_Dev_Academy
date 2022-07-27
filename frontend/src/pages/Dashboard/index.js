@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import StationList from 'components/Station'
 
 import {
   Card,
@@ -42,11 +43,11 @@ const Dashboard = () => {
               </Form.Item>
 
               <Form.Item label="Departure Station" labelCol={{ span: 6 }}>
-                {/* <StationList /> */}
+                <StationList />
               </Form.Item>
 
               <Form.Item label="Return Station" labelCol={{ span: 6 }}>
-                {/* <StationList /> */}
+                <StationList />
               </Form.Item>
 
               <Form.Item label="Covered Distance" labelCol={{ span: 6 }}>
