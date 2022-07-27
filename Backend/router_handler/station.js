@@ -58,8 +58,14 @@ exports.getSingleStation = (req, res) => {
   const sqlStr2 = `select count(*) as endCount from journeys where return_station_id = ${stationId}`
   const sqlStr3 = `select AVG(covered_distance) as startAvg from journeys where departure_station_id = ${stationId}`
   const sqlStr4 = `select AVG(covered_distance) as endAvg from journeys where return_station_id = ${stationId}`
-  const sqlStr5 = `select return_station_name, count(1) as times from solita_db.journeys where departure_station_id = ${stationId} group by return_station_name order by times desc limit 5`
-  const sqlStr6 = `select departure_station_name, count(1) as times from solita_db.journeys where return_station_id = ${stationId}  group by departure_station_name order by times desc limit 5`
+  const sqlStr5 = `select return_station_name, count(1) as times from journeys where departure_station_id = ${stationId} group by return_station_name order by times desc limit 5`
+  const sqlStr6 = `select departure_station_name, count(1) as times from journeys where return_station_id = ${stationId}  group by departure_station_name order by times desc limit 5`
+
+  // const sqlStr = `select * from stations where id = ${stationId}`
+  // const sqlStr1 = `select count(*) as startCount, AVG(covered_distance) as startAvg from journeys where departure_station_id = ${stationId}`
+  // const sqlStr2 = `select count(*) as endCount, select AVG(covered_distance) as endAvg from journeys where return_station_id = ${stationId}`
+  // const sqlStr5 = `select return_station_name, count(1) as times from journeys where departure_station_id = ${stationId} group by return_station_name order by times desc limit 5`
+  // const sqlStr6 = `select departure_station_name, count(1) as times from journeys where return_station_id = ${stationId}  group by departure_station_name order by times desc limit 5`
 
   db.query(
     `${sqlStr};${sqlStr1};${sqlStr2};${sqlStr3};${sqlStr4};${sqlStr5};${sqlStr6}`,
