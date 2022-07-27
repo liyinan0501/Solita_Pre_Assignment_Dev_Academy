@@ -34,7 +34,11 @@ const Dashboard = () => {
   }
 
   const onChange = (changedValues, { date, Time }) => {
-    if (Time !== undefined) {
+    if (Time !== undefined && date !== undefined) {
+      if (Time === null || date === null) {
+        setDuration('')
+        return
+      }
       params.departure =
         date[0].format('YYYY-MM-DD') + ' ' + Time[0].format('HH:mm:ss')
       params.return =
