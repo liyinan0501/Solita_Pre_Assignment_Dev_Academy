@@ -1,6 +1,6 @@
 const db = require('../db/index')
 
-// get journey related router handlers
+// get journey router handlers
 exports.getTrips = (req, res) => {
   let { pageNumber, pageSize, departureStationId, departureDate, returnDate } =
     req.query
@@ -47,4 +47,17 @@ exports.getTrips = (req, res) => {
       })
     })
   }
+}
+
+// add a trip router handler
+exports.addTrip = (req, res) => {
+  console.log(req.body)
+  // const insertTrip = `insert journeys set ?, departure_station_name = (select nimi from stations where id = ${req.body.departure_station_id}), return_station_name = (select nimi from stations where id = ${req.body.return_station_id})`
+  // const data = { ...req.body }
+  // console.log(data)
+  // db.query(insertTrip, { ...req.body }, (err, results) => {
+  //   if (err) return res.cc(err)
+  //   if (results.affectedRows !== 1) return res.cc('Adding fails', 507)
+  //   return res.cc('adding journey succeeds!', 201)
+  // })
 }

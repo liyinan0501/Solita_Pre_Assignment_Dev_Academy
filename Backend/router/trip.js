@@ -6,4 +6,6 @@ const { get_trips_schema } = require('../schema/trip')
 
 router.get('/trips', expressJoi(get_trips_schema), trip_handler.getTrips)
 
+router.post('/addTrip', trip_handler.addTrip)
+
 module.exports = router
