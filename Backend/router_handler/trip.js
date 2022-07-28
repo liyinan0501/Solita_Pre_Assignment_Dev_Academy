@@ -19,12 +19,12 @@ exports.getTrips = (req, res) => {
   )
 
   if (!departureStationId) {
-    const sqlStr1 = 'select count(*) as totalCount from journeys'
-    db.query(sqlStr1, (err, results) => {
+    const getTotal = 'select count(*) as totalCount from journeys'
+    db.query(getTotal, (err, results) => {
       if (err) return res.cc(err, 500)
       data.totalCount = results[0].totalCount
-      const sqlStr2 = `select * from journeys limit ${startRow}, ${pageSize}`
-      db.query(sqlStr2, (err, results) => {
+      const getJourneys = `select * from journeys limit ${startRow}, ${pageSize}`
+      db.query(getJourneys, (err, results) => {
         if (err) return res.cc(err, 500)
         data.pageNumber = pageNumber
         data.pageSize = pageSize
@@ -33,12 +33,12 @@ exports.getTrips = (req, res) => {
       })
     })
   } else {
-    const sqlStr1 = `select count(*) as totalCount from journeys where departure_station_id = ${departureStationId} and departure >= '${departureDate}' and \`return\` <= '${returnDate}'`
-    db.query(sqlStr1, (err, results) => {
+    const getTotal = `select count(*) as totalCount from journeys where departure_station_id = ${departureStationId} and departure >= '${departureDate}' and \`return\` <= '${returnDate}'`
+    db.query(getTotal, (err, results) => {
       if (err) return res.cc(err, 500)
       data.totalCount = results[0].totalCount
-      const sqlStr2 = `select * from journeys where departure_station_id = ${departureStationId} and departure >= '${departureDate}' and \`return\` <= '${returnDate}' order by departure asc limit ${startRow}, ${pageSize}`
-      db.query(sqlStr2, (err, results) => {
+      const getJourneysByIdDate = `select * from journeys where departure_station_id = ${departureStationId} and departure >= '${departureDate}' and \`return\` <= '${returnDate}' order by departure asc limit ${startRow}, ${pageSize}`
+      db.query(getJourneysByIdDate, (err, results) => {
         if (err) return res.cc(err, 500)
         data.pageNumber = pageNumber
         data.pageSize = pageSize

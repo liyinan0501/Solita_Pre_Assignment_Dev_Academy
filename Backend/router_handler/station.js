@@ -11,12 +11,12 @@ exports.getStations = (req, res) => {
 
   console.log(pageNumber, pageSize, stationId)
   if (!stationId) {
-    const sqlStr = `select count(*) as totalCount from stations`
-    db.query(sqlStr, (err, results) => {
+    const getTotal = `select count(*) as totalCount from stations`
+    db.query(getTotal, (err, results) => {
       if (err) return res.cc(err, 500)
       data.totalCount = results[0].totalCount
-      const sqlStr2 = `select * from stations order by id asc limit ${startRow}, ${pageSize}`
-      db.query(sqlStr2, (err, results) => {
+      const allStations = `select * from stations order by id asc limit ${startRow}, ${pageSize}`
+      db.query(allStations, (err, results) => {
         if (err) return res.cc(err, 500)
         data.pageNumber = pageNumber
         data.pageSize = pageSize
@@ -25,12 +25,12 @@ exports.getStations = (req, res) => {
       })
     })
   } else {
-    const sqlStr = `select count(*) as totalCount from stations where id = ${stationId}`
-    db.query(sqlStr, (err, results) => {
+    const getTotalById = `select count(*) as totalCount from stations where id = ${stationId}`
+    db.query(getTotalById, (err, results) => {
       if (err) return res.cc(err, 500)
       data.totalCount = results[0].totalCount
-      const sqlStr2 = `select * from stations where id = ${stationId} limit ${startRow}, ${pageSize}`
-      db.query(sqlStr2, (err, results) => {
+      const getStationsById = `select * from stations where id = ${stationId} limit ${startRow}, ${pageSize}`
+      db.query(getStationsById, (err, results) => {
         if (err) return res.cc(err, 500)
         data.pageNumber = pageNumber
         data.pageSize = pageSize
@@ -42,8 +42,9 @@ exports.getStations = (req, res) => {
 }
 
 exports.getStationList = (req, res) => {
-  const sqlStr = 'select id, nimi from solita_db.stations order by nimi asc'
-  db.query(sqlStr, (err, results) => {
+  const stationList =
+    'select id, nimi from solita_db.stations order by nimi asc'
+  db.query(stationList, (err, results) => {
     if (err) return res.cc(err, 500)
     res.status(200).send(results)
   })
