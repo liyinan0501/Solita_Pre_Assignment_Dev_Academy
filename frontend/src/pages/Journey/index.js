@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from 'react-redux'
 import { journeysAction } from 'store/actions'
 import StationList from 'components/Station'
 
-import styles from './index.module.scss'
 import { Card, Breadcrumb, Form, Button, DatePicker, Table } from 'antd'
 import { HomeOutlined, BranchesOutlined } from '@ant-design/icons'
 const { RangePicker } = DatePicker
@@ -70,7 +69,7 @@ const Journey = () => {
   ]
 
   return (
-    <div className={styles.root}>
+    <div>
       <Card
         title={
           <Breadcrumb>

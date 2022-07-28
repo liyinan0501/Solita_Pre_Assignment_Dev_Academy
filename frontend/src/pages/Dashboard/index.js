@@ -1,6 +1,8 @@
 import { Link } from 'react-router-dom'
 import StationList from 'components/Station'
 import { useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { addJourneyAction } from 'store/actions'
 
 import {
   Card,
@@ -19,6 +21,10 @@ const { RangePicker } = DatePicker
 
 const Dashboard = () => {
   const [duration, setDuration] = useState('')
+  const [dateState, setDateState] = useState({})
+  const [paramsDuration, setParamsDuration] = useState()
+
+  const dispatch = useDispatch()
   let params = {}
 
   const addJourney = ({
@@ -29,8 +35,10 @@ const Dashboard = () => {
     params.departure_station_id = departure_station_id
     params.return_station_id = return_station_id
     params.covered_distance = covered_distance
-
-    console.log(params)
+    params.departure = dateState.departure
+    params.return = dateState.return
+    params.duration = paramsDuration
+    dispatch(addJourneyAction(params))
   }
 
   const onChange = (changedValues, { date, Time }) => {
@@ -39,16 +47,27 @@ const Dashboard = () => {
         setDuration('')
         return
       }
-      params.departure =
-        date[0].format('YYYY-MM-DD') + ' ' + Time[0].format('HH:mm:ss')
-      params.return =
-        date[1].format('YYYY-MM-DD') + ' ' + Time[1].format('HH:mm:ss')
 
-      const startTime = +new Date(params.departure)
-      const returnTime = +new Date(params.return)
-      params.duration = (returnTime - startTime) / 1000
-      showDuration(startTime, returnTime, params.duration)
+      const formedDate = setDate(date, Time)
+      console.log(formedDate[0], formedDate[1])
+      const startTime = +new Date(formedDate[0])
+      const returnTime = +new Date(formedDate[1])
+      const duration = (returnTime - startTime) / 1000
+      setParamsDuration(duration)
+      showDuration(startTime, returnTime, duration)
     }
+  }
+
+  const setDate = (date, Time) => {
+    const departure =
+      date[0].format('YYYY-MM-DD') + ' ' + Time[0].format('HH:mm:ss')
+    const returnJourney =
+      date[1].format('YYYY-MM-DD') + ' ' + Time[1].format('HH:mm:ss')
+    setDateState({
+      departure,
+      return: returnJourney,
+    })
+    return [departure, returnJourney]
   }
 
   const showDuration = (startTime, returnTime, count) => {
@@ -78,20 +97,46 @@ const Dashboard = () => {
         }
       >
         <Row>
-          <Col span={12}>
+          <Col span={15}>
             <Form onFinish={addJourney} onValuesChange={onChange}>
-              <Form.Item label="Date" name="date" labelCol={{ span: 6 }}>
+              <Form.Item
+                label="Date"
+                name="date"
+                rules={[
+                  {
+                    required: true,
+                    message: 'Select the dates',
+                  },
+                ]}
+                labelCol={{ span: 7 }}
+              >
                 <RangePicker style={{ width: 266 }} />
               </Form.Item>
 
-              <Form.Item label="Time" name="Time" labelCol={{ span: 6 }}>
+              <Form.Item
+                label="Time"
+                name="Time"
+                rules={[
+                  {
+                    required: true,
+                    message: 'Select the times',
+                  },
+                ]}
+                labelCol={{ span: 7 }}
+              >
                 <TimePicker.RangePicker style={{ width: 266 }} />
               </Form.Item>
 
               <Form.Item
                 label="Departure Station"
                 name="departure_station_id"
-                labelCol={{ span: 6 }}
+                rules={[
+                  {
+                    required: true,
+                    message: 'Select the a departure station',
+                  },
+                ]}
+                labelCol={{ span: 7 }}
               >
                 <StationList />
               </Form.Item>
@@ -99,15 +144,27 @@ const Dashboard = () => {
               <Form.Item
                 label="Return Station"
                 name="return_station_id"
-                labelCol={{ span: 6 }}
+                rules={[
+                  {
+                    required: true,
+                    message: 'Select the a return station',
+                  },
+                ]}
+                labelCol={{ span: 7 }}
               >
                 <StationList />
               </Form.Item>
 
               <Form.Item
-                label="Covered Distance"
+                label="Covered Distance (m)"
                 name="covered_distance"
-                labelCol={{ span: 6 }}
+                rules={[
+                  {
+                    required: true,
+                    message: 'input covered distance',
+                  },
+                ]}
+                labelCol={{ span: 7 }}
               >
                 <InputNumber />
               </Form.Item>
@@ -115,48 +172,14 @@ const Dashboard = () => {
               <Form.Item
                 label="Duration"
                 name="duration"
-                labelCol={{ span: 6 }}
+                labelCol={{ span: 7 }}
               >
                 <span>{duration}</span>
               </Form.Item>
 
-              <Form.Item wrapperCol={{ offset: 6 }}>
+              <Form.Item wrapperCol={{ offset: 7 }}>
                 <Button type="primary" htmlType="submit">
                   Add Journey
-                </Button>
-              </Form.Item>
-            </Form>
-          </Col>
-
-          <Col span={12}>
-            <Form>
-              <Form.Item label="Station Number" labelCol={{ span: 6 }}>
-                <InputNumber />
-              </Form.Item>
-
-              <Form.Item label="Kapasiteet" labelCol={{ span: 6 }}>
-                <InputNumber />
-              </Form.Item>
-
-              <Form.Item label="Name" labelCol={{ span: 6 }}>
-                <Input style={{ width: 266 }} />
-              </Form.Item>
-
-              <Form.Item label="Address" labelCol={{ span: 6 }}>
-                <Input style={{ width: 266 }} />
-              </Form.Item>
-
-              <Form.Item label="City" labelCol={{ span: 6 }}>
-                <Input style={{ width: 266 }} />
-              </Form.Item>
-
-              <Form.Item label="Operator" labelCol={{ span: 6 }}>
-                <Input style={{ width: 266 }} />
-              </Form.Item>
-
-              <Form.Item wrapperCol={{ offset: 6 }}>
-                <Button type="primary" htmlType="submit">
-                  Add Station
                 </Button>
               </Form.Item>
             </Form>

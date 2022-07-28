@@ -1,4 +1,4 @@
-import { getJourneyList } from 'api/journey'
+import { getJourneyList, addJourney } from 'api/journey'
 
 export const journeysAction = (params) => {
   return async (dispatch) => {
@@ -8,5 +8,12 @@ export const journeysAction = (params) => {
       type: 'getJourneys',
       payload: res,
     })
+  }
+}
+
+export const addJourneyAction = (params) => {
+  console.log('action:', params)
+  return async (dispatch) => {
+    await addJourney(params)
   }
 }
