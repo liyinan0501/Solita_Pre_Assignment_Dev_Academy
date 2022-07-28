@@ -2,7 +2,7 @@ import request from 'utils/request'
 import Qs from 'qs'
 
 /**
- * login request
+ * request for login
  * @param {string} username
  * @param {string} password
  * @returns

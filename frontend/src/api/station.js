@@ -1,8 +1,7 @@
 import request from 'utils/request'
 
 /**
- * station list request
- * @returns
+ * request for the station list
  */
 export function getStationList() {
   return request({
@@ -12,7 +11,7 @@ export function getStationList() {
 }
 
 /**
- * all stations request
+ * request for
  * {@param}:
  * @param {number} pageNumber
  * @param {number} pageSize
@@ -27,8 +26,7 @@ export function getStations(params) {
 }
 
 /**
- * single station request
- * {@param}:
+ * request for a single station
  * @param {number} stationId
  */
 export function getSingleStation(params) {
