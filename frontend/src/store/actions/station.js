@@ -25,7 +25,7 @@ export const stationsAction = (params) => {
 export const singleStationAction = (params) => {
   return async (dispatch) => {
     const res = await getSingleStation(params)
-    console.log(res)
+
     dispatch({
       type: 'getSingleStation',
       payload: res,
