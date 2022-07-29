@@ -61,11 +61,12 @@
 
 ### <u>Response</u>
 
-| Status | Description                    |
-| ------ | ------------------------------ |
-| 200    | ok                             |
-| 401    | unvalid token or token missing |
-| 500    | server or database error       |
+| Status | Description                         |
+| ------ | ----------------------------------- |
+| 200    | ok                                  |
+| 204    | request succeeds, no content found. |
+| 401    | unvalid token or token missing.     |
+| 500    | server or database error.           |
 
 ### <u>Response Schema:</u>
 
