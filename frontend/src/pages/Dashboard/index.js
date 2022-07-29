@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import StationList from 'components/Station'
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
@@ -12,9 +12,9 @@ import {
   DatePicker,
   TimePicker,
   InputNumber,
-  Input,
   Col,
   Row,
+  message,
 } from 'antd'
 import { HomeOutlined } from '@ant-design/icons'
 const { RangePicker } = DatePicker
@@ -23,11 +23,12 @@ const Dashboard = () => {
   const [duration, setDuration] = useState('')
   const [dateState, setDateState] = useState({})
   const [paramsDuration, setParamsDuration] = useState()
+  const navigate = useNavigate()
 
   const dispatch = useDispatch()
   let params = {}
 
-  const addJourney = ({
+  const addJourney = async ({
     departure_station_id,
     return_station_id,
     covered_distance,
@@ -38,7 +39,15 @@ const Dashboard = () => {
     params.departure = dateState.departure
     params.return = dateState.return
     params.duration = paramsDuration
-    dispatch(addJourneyAction(params))
+
+    try {
+      await dispatch(addJourneyAction(params))
+      message.success('Adding Journey succeeds!', 2, () => {
+        navigate(`/home/journey`)
+      })
+    } catch (e) {
+      message.error(e.response?.data?.message, 2)
+    }
   }
 
   const onChange = (changedValues, { date, Time }) => {
@@ -49,7 +58,6 @@ const Dashboard = () => {
       }
 
       const formedDate = setDate(date, Time)
-      console.log(formedDate[0], formedDate[1])
       const startTime = +new Date(formedDate[0])
       const returnTime = +new Date(formedDate[1])
       const duration = (returnTime - startTime) / 1000
