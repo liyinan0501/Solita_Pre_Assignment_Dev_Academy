@@ -25,7 +25,7 @@ const Login = () => {
           : navigate('/home/dashboard', { replace: true })
       })
     } catch (e) {
-      message.error(e.response.data.message, 1, () => {
+      message.error(e.response?.data?.message || 'Login fails', 1, () => {
         setLoadings(false)
       })
     }
