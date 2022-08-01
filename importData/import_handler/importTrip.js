@@ -2,7 +2,7 @@ const db = require('../db/index')
 const dbInfo = require('../db/dbInfo')
 const path = require('path')
 
-module.exports = importTrip = (allFiles) => {
+module.exports = importTrip = (dataFiles) => {
   // Creating the table attributes
   const { Sequelize, DataTypes } = require('sequelize')
   const sequelize = new Sequelize(
@@ -37,14 +37,15 @@ module.exports = importTrip = (allFiles) => {
     { timestamps: false }
   )
 
-  const dataFiles = allFiles
   let dataArray = []
+  let keyItems
 
   sequelize.sync({ alter: true }).then(async () => {
     for (let fileName of dataFiles) {
       try {
         dataArray = await readTrips(fileName)
         console.log(`Reading ${fileName} completed, start to insert...`)
+        keyItems = Object.keys(dataArray)
         let totalRows = await importTrips()
         console.log(
           `All journeys in ${fileName} import completed, imported ${totalRows} rows.`
@@ -61,11 +62,12 @@ module.exports = importTrip = (allFiles) => {
     const insertTrip = `insert into ${dbInfo.tableJourney} set ?`
     let counter = 0
     return new Promise((resolve) => {
-      dataArray.forEach((item) => {
+      keyItems.forEach((item) => {
+        item = JSON.parse(item)
         db.query(insertTrip, item, (err, results) => {
           if (err) return console.log('Insert error:', err)
           if (results.affectedRows === 1) counter++
-          if (counter === dataArray.length) {
+          if (counter === keyItems.length) {
             resolve(counter)
           }
         })
@@ -94,9 +96,9 @@ module.exports = importTrip = (allFiles) => {
           })
         )
         .on('data', (data) => {
-          // validating records
+          // validating records and removing duplicate records
           if (data.duration > 10 && data.covered_distance > 10) {
-            dataArray.push(data)
+            dataArray[JSON.stringify(data)] = true
           }
         })
         .on('error', (error) => {
