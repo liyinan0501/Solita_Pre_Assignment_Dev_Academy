@@ -2,12 +2,16 @@ import { getStationList, getStations, getSingleStation } from 'api/station'
 
 export const stationListAction = () => {
   return async (dispatch) => {
-    const res = await getStationList()
+    try {
+      const res = await getStationList()
 
-    dispatch({
-      type: 'getStationList',
-      payload: res,
-    })
+      dispatch({
+        type: 'getStationList',
+        payload: res,
+      })
+    } catch (e) {
+      console.log('Error', e.message)
+    }
   }
 }
 
