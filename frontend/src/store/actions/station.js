@@ -17,22 +17,30 @@ export const stationListAction = () => {
 
 export const stationsAction = (params) => {
   return async (dispatch) => {
-    const res = await getStations(params)
+    try {
+      const res = await getStations(params)
 
-    dispatch({
-      type: 'getStations',
-      payload: res,
-    })
+      dispatch({
+        type: 'getStations',
+        payload: res,
+      })
+    } catch (e) {
+      console.log('Error', e.message)
+    }
   }
 }
 
 export const singleStationAction = (params) => {
   return async (dispatch) => {
-    const res = await getSingleStation(params)
+    try {
+      const res = await getSingleStation(params)
 
-    dispatch({
-      type: 'getSingleStation',
-      payload: res,
-    })
+      dispatch({
+        type: 'getSingleStation',
+        payload: res,
+      })
+    } catch (e) {
+      console.log('Error', e.message)
+    }
   }
 }
