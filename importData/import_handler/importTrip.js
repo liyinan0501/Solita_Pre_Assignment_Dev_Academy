@@ -1,7 +1,8 @@
 const db = require('../db/index')
 const dbInfo = require('../db/dbInfo')
+const path = require('path')
 
-module.exports = importTrip = () => {
+module.exports = importTrip = (allFiles) => {
   // Creating the table attributes
   const { Sequelize, DataTypes } = require('sequelize')
   const sequelize = new Sequelize(
@@ -36,40 +37,74 @@ module.exports = importTrip = () => {
     { timestamps: false }
   )
 
-  sequelize.sync({ alter: true }).then(() => {
-    console.log('Table is created')
-    // Importing data from CSV file
-    const csv = require('csv-parser')
-    const fs = require('fs')
-    const sqlStr = `insert into ${dbInfo.tableJourney} set ?`
-    fs.createReadStream('./asset/2021-05.csv')
-      .pipe(
-        csv({
-          skipLines: 1,
-          headers: [
-            'departure',
-            'return',
-            'departure_station_id',
-            'departure_station_name',
-            'return_station_id',
-            'return_station_name',
-            'covered_distance',
-            'duration',
-          ],
-        })
-      )
-      .on('data', (data) => {
-        // Inserting valid records to database
-        if (data.duration > 10 && data.covered_distance > 10) {
-          db.query(sqlStr, data, (err, results) => {
-            if (err) {
-              return console.log(err)
-            }
-            if (results.affectedRows !== 1) {
-              return console.log('import failed')
-            }
-          })
-        }
-      })
+  const dataFiles = allFiles
+  let dataArray = []
+
+  sequelize.sync({ alter: true }).then(async () => {
+    for (let fileName of dataFiles) {
+      try {
+        dataArray = await readTrips(fileName)
+        console.log(`Reading ${fileName} completed, start to insert...`)
+        let totalRows = await importTrips()
+        console.log(
+          `All journeys in ${fileName} import completed, imported ${totalRows} rows.`
+        )
+        dataArray = []
+      } catch (e) {
+        console.log(e)
+      }
+    }
   })
+
+  function importTrips() {
+    console.log('Inserting...')
+    const insertTrip = `insert into ${dbInfo.tableJourney} set ?`
+    let counter = 0
+    return new Promise((resolve) => {
+      dataArray.forEach((item) => {
+        db.query(insertTrip, item, (err, results) => {
+          if (err) return console.log('Insert error:', err)
+          if (results.affectedRows === 1) counter++
+          if (counter === dataArray.length) {
+            resolve(counter)
+          }
+        })
+      })
+    })
+  }
+
+  function readTrips(fileName) {
+    return new Promise((resolve) => {
+      const csv = require('csv-parser')
+      const fs = require('fs')
+      fs.createReadStream(path.join(__dirname, `./asset/${fileName}`))
+        .pipe(
+          csv({
+            skipLines: 1,
+            headers: [
+              'departure',
+              'return',
+              'departure_station_id',
+              'departure_station_name',
+              'return_station_id',
+              'return_station_name',
+              'covered_distance',
+              'duration',
+            ],
+          })
+        )
+        .on('data', (data) => {
+          // validating records
+          if (data.duration > 10 && data.covered_distance > 10) {
+            dataArray.push(data)
+          }
+        })
+        .on('error', (error) => {
+          console.log('ReadStream error:', error.message)
+        })
+        .on('end', function () {
+          resolve(dataArray)
+        })
+    })
+  }
 }
