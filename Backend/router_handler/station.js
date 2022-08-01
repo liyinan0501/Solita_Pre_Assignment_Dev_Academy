@@ -10,7 +10,7 @@ exports.getStations = (req, res) => {
   let startRow = (pageNumber - 1) * pageSize
 
   if (!stationId) {
-    const getAllStations = `select *, count(*) over() as totalCount from stations order by id asc limit ${startRow}, ${pageSize}`
+    const getAllStations = `select id, nimi, osoite, kaupunki, count(id) over() as totalCount from stations order by id asc limit ${startRow}, ${pageSize}`
     db.query(getAllStations, (err, results) => {
       if (err) return res.cc(err, 500)
       if (results.length < 1) return res.cc('Not found searched records', 204)
@@ -18,7 +18,7 @@ exports.getStations = (req, res) => {
       res.status(200).send(data)
     })
   } else {
-    const getStationById = `select *, count(*) over() as totalCount from stations where id = ${stationId} limit ${startRow}, ${pageSize}`
+    const getStationById = `select id, nimi, osoite, kaupunki, count(id) over() as totalCount from stations where id = ${stationId} limit ${startRow}, ${pageSize}`
     db.query(getStationById, (err, results) => {
       if (err) return res.cc(err, 500)
       if (results.length < 1) return res.cc('Not found searched records', 204)
@@ -41,9 +41,9 @@ exports.getSingleStation = (req, res) => {
   let data = {}
   const { stationId } = req.params
 
-  const getStationById = `select * from stations where id = ${stationId}`
-  const getStartCountAndAvg = `select count(*) as startCount, AVG(covered_distance) as startAvg from journeys where departure_station_id = ${stationId}`
-  const getEndCountAndAvg = `select count(*) as endCount, AVG(covered_distance) as endAvg from journeys where return_station_id = ${stationId}`
+  const getStationById = `select id, nimi, osoite, kaupunki from stations where id = ${stationId}`
+  const getStartCountAndAvg = `select count(id) as startCount, AVG(covered_distance) as startAvg from journeys where departure_station_id = ${stationId}`
+  const getEndCountAndAvg = `select count(id) as endCount, AVG(covered_distance) as endAvg from journeys where return_station_id = ${stationId}`
   const getReturnTop5 = `select return_station_name, count(1) as times from journeys where departure_station_id = ${stationId} group by return_station_name order by times desc limit 5`
   const getDepartureTop5 = `select departure_station_name, count(1) as times from journeys where return_station_id = ${stationId}  group by departure_station_name order by times desc limit 5`
 
