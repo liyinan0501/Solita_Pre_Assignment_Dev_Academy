@@ -18,7 +18,7 @@ exports.getStations = (req, res) => {
       res.status(200).send(data)
     })
   } else {
-    const getStationById = `select id, nimi, osoite, kaupunki, count(id) over() as totalCount from stations where id = ${stationId} limit ${startRow}, ${pageSize}`
+    const getStationById = `select id, nimi, osoite, kaupunki, count(id) over() as totalCount from stations where id = ${stationId}`
     db.query(getStationById, (err, results) => {
       if (err) return res.cc(err, 500)
       if (results.length < 1) return res.cc('Not found searched records', 204)
