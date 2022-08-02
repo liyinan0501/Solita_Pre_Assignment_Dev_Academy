@@ -6,7 +6,7 @@ exports.getTrips = (req, res) => {
     req.query
 
   pageNumber = !pageNumber ? 1 : Number(pageNumber)
-  pageSize = !pageSize ? 100 : Number(pageSize)
+  pageSize = !pageSize ? 50 : Number(pageSize)
   let data = { pageNumber, pageSize }
   let startRow = (pageNumber - 1) * pageSize
 
