@@ -11,7 +11,7 @@ exports.getTrips = (req, res) => {
   let startRow = (pageNumber - 1) * pageSize
 
   if (!departureStationId) {
-    const getAllTrips = `select id, departure_station_name, return_station_name, covered_distance, duration, count(id) over() as totalCount from journeys limit ${startRow}, ${pageSize}`
+    const getAllTrips = `select id, departure_station_name, return_station_name, covered_distance, duration, count(id) over() as totalCount from journeys order by id limit ${startRow}, ${pageSize}`
     db.query(getAllTrips, (err, results) => {
       if (err) return res.cc(err, 500)
       if (results.length < 1) return res.cc('Not found searched records', 204)
@@ -19,7 +19,7 @@ exports.getTrips = (req, res) => {
       res.status(200).send(data)
     })
   } else {
-    const searchTrips = `select id, departure_station_name, return_station_name, covered_distance, duration, count(id) over() as totalCount from journeys where departure_station_id = ${departureStationId} and departure >= '${departureDate}' and \`return\` <= '${returnDate}' order by departure asc limit ${startRow}, ${pageSize}`
+    const searchTrips = `select id, departure_station_name, return_station_name, covered_distance, duration, count(id) over() as totalCount from journeys where departure_station_id = ${departureStationId} and departure >= '${departureDate}' and \`return\` <= '${returnDate}' order by id asc limit ${startRow}, ${pageSize}`
     db.query(searchTrips, (err, results) => {
       if (err) return res.cc(err, 500)
       if (results.length < 1) return res.cc('Not found searched records', 204)
