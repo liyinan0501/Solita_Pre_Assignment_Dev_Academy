@@ -7,7 +7,7 @@ const AuthRoute = ({ children }) => {
   return hasToken() ? (
     <>{children}</>
   ) : (
-    <Navigate replace state={{ from: location }} to="/login" />
+    <Navigate replace to="/login" state={{ from: location }} />
   )
 }
 

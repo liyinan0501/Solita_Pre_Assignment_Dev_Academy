@@ -1,5 +1,11 @@
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
+import {
+  unstable_HistoryRouter as HistoryRouter,
+  Routes,
+  Route,
+  Navigate,
+} from 'react-router-dom'
 import AuthRoute from 'components/AuthRoute'
+import { history } from 'utils/history'
 
 import Login from 'pages/Login'
 import Layout from 'pages/Layout'
@@ -10,8 +16,8 @@ import NotFound from 'pages/NotFound'
 
 function App() {
   return (
-    <div className="App">
-      <BrowserRouter>
+    <HistoryRouter history={history}>
+      <div className="App">
         <Routes>
           {/* Public Routes: */}
           <Route path="/" element={<Navigate to="/login" replace />}></Route>
@@ -32,8 +38,8 @@ function App() {
             <Route path="/home/station" element={<Station />}></Route>
           </Route>
         </Routes>
-      </BrowserRouter>
-    </div>
+      </div>
+    </HistoryRouter>
   )
 }
 

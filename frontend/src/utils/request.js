@@ -1,5 +1,7 @@
+import { message } from 'antd'
 import axios from 'axios'
-import { hasToken, getToken } from './token'
+import { hasToken, getToken, removeToken } from './token'
+import { history } from 'utils/history'
 
 export const baseURL = 'http://127.0.0.1:3007/'
 
@@ -31,6 +33,15 @@ request.interceptors.response.use(
   },
   function (error) {
     // Do something with response error
+    if (!error.response) {
+      message.error(`It's busy, try later.`)
+      return Promise.reject(error)
+    }
+    if (error.response.status === 401) {
+      removeToken()
+      message.warn('Login expired', 1)
+      history.push('/login')
+    }
     return Promise.reject(error)
   }
 )
