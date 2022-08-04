@@ -75,20 +75,24 @@ node app.js
 
 ### Login View
 
-![Login](/Users/yinanli/Desktop/ReactProjects/solita_pre_assignment/Page Photos/Login.png)
+![Login](/Users/yinanli/Desktop/ReactProjects/solita_pre_assignment/README.assets/Login.png)
+
+### Add Journey View
+
+![AddJourney](/Users/yinanli/Desktop/ReactProjects/solita_pre_assignment/README.assets/AddJourney.png)
 
 ### Journey List View
 
-### ![Journeys](/Users/yinanli/Desktop/ReactProjects/solita_pre_assignment/Page Photos/Journeys.png)
+![Journeys](/Users/yinanli/Desktop/ReactProjects/solita_pre_assignment/README.assets/Journeys.png)
 
 ### Station List View
 
-![Stations](/Users/yinanli/Desktop/ReactProjects/solita_pre_assignment/Page Photos/Stations.png)
+![Stations](/Users/yinanli/Desktop/ReactProjects/solita_pre_assignment/README.assets/Stations.png)
 
 ### Single Station View
 
-![StationDetail](/Users/yinanli/Desktop/ReactProjects/solita_pre_assignment/Page Photos/StationDetail.png)
+![StationDetail](/Users/yinanli/Desktop/ReactProjects/solita_pre_assignment/README.assets/StationDetail.png)
 
 ### Import Data View
 
-![ImportData](/Users/yinanli/Desktop/ReactProjects/solita_pre_assignment/Page Photos/ImportData.png)
+![ImportData](/Users/yinanli/Desktop/ReactProjects/solita_pre_assignment/README.assets/ImportData.png)
