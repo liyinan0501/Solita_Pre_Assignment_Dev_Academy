@@ -9,7 +9,6 @@
 - [JavaScript](https://developer.mozilla.org/en-US/)
 - [Node.js](https://nodejs.org/en/)
 - [Express](https://expressjs.com/)
-- [Axios](https://axios-http.com/)
 - [cors](https://www.npmjs.com/package/cors)
 - [mysql2](https://www.npmjs.com/package/mysql2)
 - [joi](https://joi.dev/)
@@ -22,17 +21,21 @@
 
 ### Frontend
 
-## Backend Server
+- [JavaScript](https://developer.mozilla.org/en-US/)
 
-------
+- [React](https://reactjs.org/)
 
+- [Axios](https://axios-http.com/)
 
+- ###### [Ant design](https://ant.design/)
 
-## Frontend Server
+- [Redux](https://redux.js.org/)
 
-------
+- [React Router V6](https://reactrouter.com/) 
 
+- [Sass](https://sass-lang.com/)
 
+- [CSS Modules](https://github.com/css-modules/css-modules)
 
 ## Prerequisites
 
@@ -40,26 +43,52 @@
 
 NPM and Node.js installed
 
-
-
-## Installation
+## Installation & Run
 
 ------
 
-Run:
+Frontend:
 
 ```
 npm install
+npm start
+```
+
+Backend:
+
+```
+npm install
+cd src
+node app.js
+```
+
+ImportData:
+
+```
+npm install
+node app.js
 ```
 
 ## App Overview
 
 ------
 
-### Login Page
+### Login View
 
-### Journey List Page
+![Login](/Users/yinanli/Desktop/ReactProjects/solita_pre_assignment/Page Photos/Login.png)
 
-### Station List Page
+### Journey List View
 
-### Single List Page
+### ![Journeys](/Users/yinanli/Desktop/ReactProjects/solita_pre_assignment/Page Photos/Journeys.png)
+
+### Station List View
+
+![Stations](/Users/yinanli/Desktop/ReactProjects/solita_pre_assignment/Page Photos/Stations.png)
+
+### Single Station View
+
+![StationDetail](/Users/yinanli/Desktop/ReactProjects/solita_pre_assignment/Page Photos/StationDetail.png)
+
+### Import Data View
+
+![ImportData](/Users/yinanli/Desktop/ReactProjects/solita_pre_assignment/Page Photos/ImportData.png)
