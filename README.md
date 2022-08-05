@@ -22,19 +22,12 @@
 ### Frontend
 
 - [JavaScript](https://developer.mozilla.org/en-US/)
-
 - [React](https://reactjs.org/)
-
 - [Axios](https://axios-http.com/)
-
-- ###### [Ant design](https://ant.design/)
-
+- [Ant design](https://ant.design/)
 - [Redux](https://redux.js.org/)
-
-- [React Router V6](https://reactrouter.com/) 
-
+- [React Router V6](https://reactrouter.com/)
 - [Sass](https://sass-lang.com/)
-
 - [CSS Modules](https://github.com/css-modules/css-modules)
 
 ## Prerequisites
