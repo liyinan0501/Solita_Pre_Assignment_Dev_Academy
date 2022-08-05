@@ -68,24 +68,24 @@ node app.js
 
 ### Login View
 
-![Login](/Users/yinanli/Desktop/ReactProjects/solita_pre_assignment/README.assets/Login.png)
+![Login](https://github.com/liyinan0501/Solita_Pre_Assignment_Dev_Academy/blob/master/Page%20Photos/Login.png)
 
 ### Add Journey View
 
-![AddJourney](/Users/yinanli/Desktop/ReactProjects/solita_pre_assignment/README.assets/AddJourney.png)
+![AddJourney](https://github.com/liyinan0501/Solita_Pre_Assignment_Dev_Academy/blob/master/Page%20Photos/AddJourney.png)
 
 ### Journey List View
 
-![Journeys](/Users/yinanli/Desktop/ReactProjects/solita_pre_assignment/README.assets/Journeys.png)
+![Journeys](https://github.com/liyinan0501/Solita_Pre_Assignment_Dev_Academy/blob/master/Page%20Photos/Journeys.png)
 
 ### Station List View
 
-![Stations](/Users/yinanli/Desktop/ReactProjects/solita_pre_assignment/README.assets/Stations.png)
+![Stations](https://github.com/liyinan0501/Solita_Pre_Assignment_Dev_Academy/blob/master/Page%20Photos/Stations.png)
 
 ### Single Station View
 
-![StationDetail](/Users/yinanli/Desktop/ReactProjects/solita_pre_assignment/README.assets/StationDetail.png)
+![StationDetail](https://github.com/liyinan0501/Solita_Pre_Assignment_Dev_Academy/blob/master/Page%20Photos/StationDetail.png)
 
 ### Import Data View
 
-![ImportData](/Users/yinanli/Desktop/ReactProjects/solita_pre_assignment/README.assets/ImportData.png)
+![ImportData](https://github.com/liyinan0501/Solita_Pre_Assignment_Dev_Academy/blob/master/Page%20Photos/ImportData.png)
