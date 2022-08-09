@@ -1,5 +1,13 @@
 # Solita Pre-Assignment for Dev Academy - Yinan Li
 
+## Description
+
+This is Yinan Li's solution to the Solita pre-assignment for applying to Dev Academy Finland 2022.
+
+[Here you can find the pre-assignment for upcoming Dev Academy](https://github.com/solita/dev-academy-2022-fall-exercise)
+
+This is a web application that uses a backend service to fetch the data from MySQL, besides frontend uses React and Ant UI. 
+
 ## Tech & Libries
 
 ------
