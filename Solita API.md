@@ -20,6 +20,7 @@
 | Status | Description                    |
 | ------ | ------------------------------ |
 | 200    | ok                             |
+| 400    | malformed request syntax       |
 | 401    | username or password incorrect |
 | 500    | server or database error       |
 
@@ -65,6 +66,7 @@
 | ------ | ----------------------------------- |
 | 200    | ok                                  |
 | 204    | request succeeds, no content found. |
+| 400    | malformed request syntax            |
 | 401    | unvalid token or token missing.     |
 | 500    | server or database error.           |
 
@@ -94,6 +96,34 @@
 | Method | URL                                  |
 | ------ | ------------------------------------ |
 | POST   | http://127.0.0.1:3007/solita/addTrip |
+
+### <u>Params</u>
+
+#### Header:
+
+| Name          | Required | Description |
+| ------------- | -------- | ----------- |
+| Authorization | true     | token       |
+
+#### Body:
+
+| Name                 | Required | Type    | Description         |
+| -------------------- | -------- | ------- | ------------------- |
+| departure_station_id | true     | integer |                     |
+| return_station_id    | true     | integer |                     |
+| covered_distance     | true     | integer | unit: meter         |
+| departure            | true     | string  | 2022-01-01 01:00:00 |
+| return               | true     | string  | 2022-01-01 02:00:00 |
+| duration             | true     | integer | unit: minute        |
+
+### <u>Response</u>
+
+| Status | Description                    |
+| ------ | ------------------------------ |
+| 201    | created                        |
+| 400    | malformed request syntax       |
+| 401    | unvalid token or token missing |
+| 507    | server or database error       |
 
 # Station
 
@@ -126,6 +156,7 @@
 | Status | Description                    |
 | ------ | ------------------------------ |
 | 200    | ok                             |
+| 400    | malformed request syntax       |
 | 401    | unvalid token or token missing |
 | 500    | server or database error       |
 
@@ -215,6 +246,7 @@
 | Status | Description                    |
 | ------ | ------------------------------ |
 | 200    | ok                             |
+| 400    | malformed request syntax       |
 | 401    | unvalid token or token missing |
 | 500    | server or database error       |
 
