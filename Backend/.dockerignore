@@ -1,0 +1,43 @@
+# Dependency directories
+
+node_modules
+.DS_Store
+dist
+
+# git
+
+.git
+.gitignore
+
+# node-waf configuration
+
+.lock-wscript
+
+# Complied binary addons (http://nodejs.org/api/addons.html)
+
+build/Release
+.dockerignore
+Dockerfile
+_docker-compose_
+
+# Logs
+
+logs
+\*.log
+
+# Runtime data
+
+.idea
+.vscode
+_.suo
+_.ntvs\*
+_.njsproj
+_.sln
+_.sln
+_.sw*
+pids
+*.pid
+\*.seed
+.git
+.hg
+.svn
