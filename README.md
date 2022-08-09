@@ -8,7 +8,7 @@ This is Yinan Li's solution to the Solita pre-assignment for applying to Dev Aca
 
 This is a web application that uses a backend service to fetch the data from MySQL, besides frontend uses React and Ant UI. 
 
-## Tech & Libries
+## Tech & Libraries
 
 ------
 
