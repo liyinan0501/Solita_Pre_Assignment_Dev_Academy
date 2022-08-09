@@ -95,8 +95,6 @@
 | ------ | ------------------------------------ |
 | POST   | http://127.0.0.1:3007/solita/addTrip |
 
-
-
 # Station
 
 ## Retreive stations
