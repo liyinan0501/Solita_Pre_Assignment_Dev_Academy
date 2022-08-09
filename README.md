@@ -1,4 +1,4 @@
-# Solita Pre-Assignment for Dev Academy
+# Solita Pre-Assignment for Dev Academy - Yinan Li
 
 ## Tech & Libries
 
@@ -18,6 +18,7 @@
 - [sequelize](https://sequelize.org/)
 - [csv-parser](https://www.npmjs.com/package/csv-parser)
 - [sqlite3](https://www.npmjs.com/package/sqlite3)
+- [docker](https://www.docker.com/)
 
 ### Frontend
 
@@ -40,14 +41,14 @@ NPM and Node.js installed
 
 ------
 
-Frontend:
+### Step 1: Import Data
 
 ```
 npm install
-npm start
+node app.js
 ```
 
-Backend:
+### Step 2: Backend
 
 ```
 npm install
@@ -55,11 +56,11 @@ cd src
 node app.js
 ```
 
-ImportData:
+### Step 3: frontend
 
 ```
 npm install
-node app.js
+npm start
 ```
 
 ## App Overview
