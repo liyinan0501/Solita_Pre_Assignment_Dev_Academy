@@ -56,7 +56,7 @@ cd src
 node app.js
 ```
 
-### Step 3: frontend
+### Step 3: Frontend
 
 ```
 npm install
